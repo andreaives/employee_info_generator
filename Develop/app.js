@@ -10,16 +10,16 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { create } = require("domain");
 
+createManager();
 //need to prompt the user to choose what type of employee 
 //they would like to add if any
-function createEmployee(){}
+function createEmployee(){
 inquirer.prompt ([
  {
 type: "list",
 message: "What is the title of the employee you would like to add?",
-choices: ['Manager', 'Engineer', 'Intern', "None"],
+choices: ['Engineer', 'Intern', "None"],
 name: 'employeeTitle'
 }
 //.then creating a switch to prompt different questions or no questions 
@@ -30,12 +30,12 @@ switch (response.employeeTitle) {
  break;
  case 'Intern': createIntern()
  break;
- // case 'None':
- // need to call the logic that runs HTML
+ default: createTeam();
+ 
 }
-
+ 
 })
-
+}
 //create manager prompt which needs to run first then calls createEmployee
 function createManager(){
  inquirer.prompt ([
@@ -109,6 +109,14 @@ function createIntern(){
   createEmployee()
  })
   
+}
+
+function createTeam(){
+if (fs.existsSync(OUTPUT_DIR)){
+ fs.mkdirSync(OUTPUT_DIR)
+}
+fs.writeFileSync(outputPath, render(finalTeam), "UTF-8")
+
 }
 
 
