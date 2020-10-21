@@ -57,10 +57,51 @@ function createManager(){
  createEmployee();
 }
 
-//prompts fo Engineer
+//prompts for Engineer
 function createEngineer(){
- 
+ inquirer.prompt ([
+   {
+    message: "What is the engineer/'s name?",
+    name: 'name'
+   },{
+    message: "What is the engineer/'s ID?",
+    name: "id"
+   },{
+    message: "What is the engineer/'s email?",
+    name: "email"
+   },{
+    message: "What is the engineer/'s gitHub username?",
+    name: "github"
+   }
+   
+ ]).then(response => {
+
+ })
+  
 }
+
+//intern prompt
+function createintern(){
+ inquirer.prompt ([
+  {
+   message: "What is the intern/'s name?",
+   name: 'name'
+  },{
+   message: "What is the intern/'s ID?",
+   name: "id"
+  },{
+   message: "What is the intern/'s email?",
+   name: "email"
+  },{
+   message: "Where does the intern go to school?",
+   name: "school"
+  }
+ ]).then(response => {
+
+ })
+  
+}
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
