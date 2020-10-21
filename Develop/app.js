@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const finalTeam =[]
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -50,7 +51,10 @@ function createManager(){
    message: 'What is the managers office number?',
    name: 'officeNumber'
   }
+  //capture the response in manager variable with class of Manager
  ]).then(response => {
+  const manager = new Manager(response.name, response.id, response.email, response.officeNumber)
+  finalTeam.push(manager)
 
  })
 
@@ -75,13 +79,15 @@ function createEngineer(){
    }
    
  ]).then(response => {
-
+  const engineer = new Engineer(response.name, response.id, response.email, response.github)
+  finalTeam.push(engineer)
+  createEmployee()
  })
-  
+ 
 }
 
 //intern prompt
-function createintern(){
+function createIntern(){
  inquirer.prompt ([
   {
    message: "What is the intern/'s name?",
@@ -97,7 +103,9 @@ function createintern(){
    name: "school"
   }
  ]).then(response => {
-
+  const intern = new Intern(response.name, response.id, response.email, response.school)
+  finalTeam.push(intern)
+  createEmployee()
  })
   
 }
