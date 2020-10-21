@@ -31,6 +31,7 @@ switch (response.employeeTitle) {
  case 'Intern': createIntern()
  break;
  // case 'None':
+ // need to call the logic that runs HTML
 }
 
 })
