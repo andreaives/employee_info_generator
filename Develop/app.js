@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-createManager();
+
 //need to prompt the user to choose what type of employee 
 //they would like to add if any
 function createEmployee(){
@@ -56,12 +56,12 @@ function createManager(){
  ]).then(response => {
   const manager = new Manager(response.name, response.id, response.email, response.officeNumber)
   finalTeam.push(manager)
-
+  createEmployee();
  })
-
- createEmployee();
+ 
+ 
 }
-
+createManager();
 //prompts for Engineer
 function createEngineer(){
  inquirer.prompt ([
@@ -112,7 +112,7 @@ function createIntern(){
 }
 
 function createTeam(){
-if (fs.existsSync(OUTPUT_DIR)){
+if (!fs.existsSync(OUTPUT_DIR)){
  fs.mkdirSync(OUTPUT_DIR)
 }
 fs.writeFileSync(outputPath, render(finalTeam), "UTF-8")
