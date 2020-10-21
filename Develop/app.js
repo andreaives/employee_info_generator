@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { create } = require("domain");
 
 //need to prompt the user to choose what type of employee 
 //they would like to add if any
@@ -32,6 +33,34 @@ switch (response.employeeTitle) {
 }
 
 })
+
+//create manager prompt which needs to run first then calls createEmployee
+function createManager(){
+ inquirer.prompt ([
+  {
+   message: "What is the managers name?",
+   name: 'name'
+  },{
+   message: 'What is the managers ID?',
+   name: 'id'
+  },{
+   message: 'What is the managers email?',
+   name: 'email'
+  },{
+   message: 'What is the managers office number?',
+   name: 'officeNumber'
+  }
+ ]).then(response => {
+
+ })
+
+ createEmployee();
+}
+
+//prompts fo Engineer
+function createEngineer(){
+ 
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
